@@ -17,11 +17,15 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
     const createPageURL = (pageNumber: number | string) => {
         const params = new URLSearchParams(searchParams);
         console.log(params, pageNumber);
-        
+
         params.set('page', pageNumber.toString());
         console.log(`${pathname}?${params.toString()}`);
-        
-        return `${pathname}?${params.toString()}`;
+
+        // return `${pathname}?${params.toString()}`;
+        return {
+            pathname,
+            params: params.toString(),
+        };
     };
     return (
         <>
@@ -77,11 +81,11 @@ function PaginationNumber({
     position,
 }: {
     page: number | string;
-    href: string;
+    href: { pathname: string; params: string };
     position?: 'first' | 'last' | 'middle' | 'single';
     isActive: boolean;
 }) {
-    console.log("href", href)
+    console.log('href', href);
 
     const className = clsx(
         'flex h-10 w-10 items-center justify-center text-sm border',
@@ -97,7 +101,10 @@ function PaginationNumber({
     return isActive || position === 'middle' ? (
         <div className={className}>{page}</div>
     ) : (
-        <Link href={href} className={className}>
+        <Link
+            href={{ pathname: href.pathname, query: href.params }}
+            className={className}
+        >
             {page}
         </Link>
     );
@@ -108,7 +115,7 @@ function PaginationArrow({
     direction,
     isDisabled,
 }: {
-    href: string;
+    href: { pathname: string; params: string };
     direction: 'left' | 'right';
     isDisabled?: boolean;
 }) {
@@ -132,7 +139,10 @@ function PaginationArrow({
     return isDisabled ? (
         <div className={className}>{icon}</div>
     ) : (
-        <Link className={className} href={href}>
+        <Link
+            className={className}
+            href={{ pathname: href.pathname, query: href.params }}
+        >
             {icon}
         </Link>
     );
