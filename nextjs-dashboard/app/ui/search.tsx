@@ -18,14 +18,9 @@ export default function Search({ placeholder }: { placeholder: string }) {
         } else {
             params.delete('query');
         }
-        // const newRoute = `${pathname}?${params.toString()}`;
-        // replace(newRoute as RouteImpl<`${string}?${string}`>);
-
         replace(
             `${pathname}?${params.toString()}` as __next_route_internal_types__.RouteImpl<RouteType>
         );
-        // let newRoute = `${pathname}?${params.toString()}`
-        // replace(`${pathname}` + '?' + `${params.toString()}`);
 
         console.log(term);
     }, 300);

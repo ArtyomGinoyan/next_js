@@ -16,12 +16,9 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
     const allPages = generatePagination(currentPage, totalPages);
     const createPageURL = (pageNumber: number | string) => {
         const params = new URLSearchParams(searchParams);
-        console.log(params, pageNumber);
 
         params.set('page', pageNumber.toString());
-        console.log(`${pathname}?${params.toString()}`);
 
-        // return `${pathname}?${params.toString()}`;
         return {
             pathname,
             params: params.toString(),
@@ -85,8 +82,6 @@ function PaginationNumber({
     position?: 'first' | 'last' | 'middle' | 'single';
     isActive: boolean;
 }) {
-    console.log('href', href);
-
     const className = clsx(
         'flex h-10 w-10 items-center justify-center text-sm border',
         {
