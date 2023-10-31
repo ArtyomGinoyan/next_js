@@ -1,6 +1,7 @@
 'use client';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { RouteType } from 'next/dist/lib/load-custom-routes';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
 
@@ -20,7 +21,9 @@ export default function Search({ placeholder }: { placeholder: string }) {
         // const newRoute = `${pathname}?${params.toString()}`;
         // replace(newRoute as RouteImpl<`${string}?${string}`>);
 
-        replace(`${pathname}?${params.toString()}`);
+        replace(
+            `${pathname}?${params.toString()}` as __next_route_internal_types__.RouteImpl<RouteType>
+        );
         // let newRoute = `${pathname}?${params.toString()}`
         // replace(`${pathname}` + '?' + `${params.toString()}`);
 
